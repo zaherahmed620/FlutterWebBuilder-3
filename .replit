@@ -13,26 +13,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Flutter Web Server"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "flutter_setup"
-
-[[workflows.workflow]]
-name = "Flutter Web Server"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-
-[[workflows.workflow.tasks]]
-task = "packager.installForAll"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "bash run.sh"
-waitForPort = 5000
 
 [[workflows.workflow]]
 name = "flutter_setup"

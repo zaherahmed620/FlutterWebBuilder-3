@@ -1,53 +1,41 @@
 #!/bin/bash
 set -e
 
-# Create Flutter directory if it doesn't exist
+# Set up Flutter directory
 FLUTTER_ROOT="/home/runner/flutter"
 
-# Remove any existing incomplete Flutter installation
-if [ -d "$FLUTTER_ROOT" ]; then
-  echo "Removing existing Flutter directory..."
-  rm -rf "$FLUTTER_ROOT"
-fi
+# Clean up any previous installation
+echo "Cleaning up previous Flutter installation..."
+rm -rf "$FLUTTER_ROOT"
+rm -rf /tmp/flutter_*
 
-echo "Installing Flutter SDK..."
-mkdir -p "$FLUTTER_ROOT"
+echo "Installing Flutter SDK using git clone..."
+# Use git clone which is required by Flutter
+git clone --depth 1 https://github.com/flutter/flutter.git -b stable "$FLUTTER_ROOT"
 
-# Download Flutter SDK directly
-echo "Downloading Flutter SDK..."
-cd /tmp
-FLUTTER_ARCHIVE="flutter_linux_3.19.3-stable.tar.xz"
-wget -q https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/$FLUTTER_ARCHIVE
-echo "Extracting Flutter SDK..."
-tar xf $FLUTTER_ARCHIVE -C /home/runner
-rm $FLUTTER_ARCHIVE
+# Make Flutter executable
+chmod +x "$FLUTTER_ROOT/bin/flutter"
 
-# Ensure Flutter is in the PATH
+# Add Flutter to PATH
+echo "Adding Flutter to PATH"
 export PATH="$FLUTTER_ROOT/bin:$PATH"
-echo "Flutter PATH set to: $PATH"
 
-# Verify Flutter installation
-if [ -f "$FLUTTER_ROOT/bin/flutter" ]; then
-  echo "Flutter binary found at $FLUTTER_ROOT/bin/flutter"
-  chmod +x "$FLUTTER_ROOT/bin/flutter"
-  
-  # Run Flutter doctor to download Dart SDK and perform initial setup
-  echo "Running Flutter doctor..."
-  "$FLUTTER_ROOT/bin/flutter" --version
-  "$FLUTTER_ROOT/bin/flutter" doctor -v
-  
-  # Configure Flutter for web
-  echo "Configuring Flutter for web..."
-  "$FLUTTER_ROOT/bin/flutter" config --enable-web
-  
-  echo "Flutter setup complete!"
-else
-  echo "ERROR: Flutter binary not found at $FLUTTER_ROOT/bin/flutter"
-  if [ -d "$FLUTTER_ROOT" ]; then
-    echo "Contents of Flutter directory:"
-    ls -la "$FLUTTER_ROOT"
-    echo "Contents of Flutter bin directory:"
-    ls -la "$FLUTTER_ROOT/bin" || echo "bin directory not found"
-  fi
-  exit 1
-fi
+# Print flutter version to verify installation
+echo "Verifying Flutter installation:"
+"$FLUTTER_ROOT/bin/flutter" --version
+
+# Download Flutter artifacts (this may take some time)
+echo "Downloading Flutter dependencies..."
+"$FLUTTER_ROOT/bin/flutter" precache
+
+# Enable Flutter web
+echo "Enabling Flutter web support"
+"$FLUTTER_ROOT/bin/flutter" config --enable-web
+
+# Create project directory if it doesn't exist
+FLUTTER_PROJECT_DIR="/home/runner/my_flutter_web_project"
+mkdir -p "$FLUTTER_PROJECT_DIR"
+
+echo "Flutter environment setup complete!"
+echo "Project directory created at $FLUTTER_PROJECT_DIR"
+echo "You can now upload your Flutter project files to this directory."
