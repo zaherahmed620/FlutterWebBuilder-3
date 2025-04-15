@@ -15,6 +15,10 @@ author = "agent"
 task = "workflow.run"
 args = "flutter_setup"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Flutter Web App"
+
 [[workflows.workflow]]
 name = "flutter_setup"
 author = "agent"
@@ -29,5 +33,24 @@ task = "packager.installForAll"
 task = "shell.exec"
 args = "bash setup_flutter.sh"
 
+[[workflows.workflow]]
+name = "Flutter Web App"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "bash run.sh"
+waitForPort = 5000
+
 [deployment]
 run = ["sh", "-c", "bash run.sh"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
