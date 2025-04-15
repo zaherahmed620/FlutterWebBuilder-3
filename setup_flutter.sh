@@ -4,14 +4,21 @@ set -e
 # Set up Flutter directory
 FLUTTER_ROOT="/home/runner/flutter"
 
-# Clean up any previous installation
-echo "Cleaning up previous Flutter installation..."
-rm -rf "$FLUTTER_ROOT"
-rm -rf /tmp/flutter_*
+# Check if Flutter is already installed
+if [ -d "$FLUTTER_ROOT" ] && [ -f "$FLUTTER_ROOT/bin/flutter" ]; then
+  echo "Flutter SDK already installed. Updating..."
+  cd "$FLUTTER_ROOT"
+  git pull origin stable
+else
+  # Clean up any previous partial installation
+  echo "Cleaning up previous Flutter installation..."
+  rm -rf "$FLUTTER_ROOT"
+  rm -rf /tmp/flutter_*
 
-echo "Installing Flutter SDK using git clone..."
-# Use git clone which is required by Flutter
-git clone --depth 1 https://github.com/flutter/flutter.git -b stable "$FLUTTER_ROOT"
+  echo "Installing Flutter SDK using git clone..."
+  # Use git clone which is required by Flutter
+  git clone --depth 1 https://github.com/flutter/flutter.git -b stable "$FLUTTER_ROOT"
+fi
 
 # Make Flutter executable
 chmod +x "$FLUTTER_ROOT/bin/flutter"

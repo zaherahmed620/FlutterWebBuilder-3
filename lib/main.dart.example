@@ -1,0 +1,99 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+// استيراد الشاشات والخدمات المختلفة
+// import 'screens/splash_screen.dart';
+// import 'screens/login_screen.dart';
+// import 'screens/home_screen.dart';
+// import 'services/api_service.dart';
+// import 'utils/constants.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Yemen Mazady',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: const Color(0xFF0175C2),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF0175C2),
+          primary: const Color(0xFF0175C2),
+          secondary: const Color(0xFF02569B),
+        ),
+        fontFamily: 'Cairo',
+        useMaterial3: true,
+      ),
+      // Enable Arabic localization
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ar'), // Arabic
+        Locale('en'), // English
+      ],
+      locale: const Locale('ar'), // Default to Arabic
+      
+      // تعريف الشاشة الرئيسية
+      home: const HomePage(),
+    );
+  }
+}
+
+// صفحة بسيطة للعرض
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final _baseUrl = 'https://yemenmazady.com/api/';
+  final _apiKey = '9fedcbced6b38503dcae6c8e1f766a2d';
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('يمن مزادي'),
+        backgroundColor: Theme.of(context).primaryColor,
+        foregroundColor: Colors.white,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.check_circle_outline, color: Colors.green, size: 80),
+            const SizedBox(height: 20),
+            const Text(
+              'تم تجهيز تطبيق Flutter للويب بنجاح!',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'API URL: $_baseUrl',
+              style: const TextStyle(fontSize: 14),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                // قم بتنفيذ إجراء عند النقر
+              },
+              child: const Text('استكشاف التطبيق'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

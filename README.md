@@ -1,53 +1,143 @@
-# Flutter Web Development Environment
+# Flutter Web for cPanel - بيئة تطوير Flutter للويب
 
-This Replit project provides a ready-to-use Flutter Web development environment where you can build your Flutter web application.
+هذه البيئة مجهزة لتطوير وبناء تطبيق Flutter Web ورفعه على استضافة cPanel.
+
+## الميزات
+
+- ✅ Flutter SDK مُثبت ومُعَد مسبقاً
+- ✅ دعم Flutter للويب مُفعّل
+- ✅ مكتبات نموذجية لـ API (api_service.dart)
+- ✅ مجلد جاهز لمشروعك (/my_flutter_web_project)
+- ✅ أدوات خاصة لبناء الملفات بتنسيق متوافق مع cPanel
+
+## كيفية الاستخدام
+
+### 1. تحميل ملفات مشروعك
+
+قم بتحميل ملفات مشروع Flutter الخاص بك إلى المجلد:
+```
+/home/runner/my_flutter_web_project
+```
+
+تأكد من أن لديك على الأقل الملفات التالية:
+- `pubspec.yaml`
+- مجلد `lib/` يحتوي على `main.dart`
+- ملفات مشروع Flutter الأخرى
+
+### 2. بناء نسخة الويب للرفع على cPanel
+
+شغل الأمر التالي:
+```
+./build_for_cpanel.sh
+```
+
+سيقوم هذا السكربت بما يلي:
+1. تثبيت اعتماديات مشروعك
+2. بناء نسخة الويب مع تحسينات خاصة بـ cPanel
+3. إنشاء ملف `web.zip` جاهز للرفع
+
+### 3. تنزيل ملف ZIP ورفعه على cPanel
+
+بعد اكتمال عملية البناء، ستجد ملف:
+```
+/home/runner/web.zip
+```
+
+قم بتنزيل هذا الملف ثم:
+1. تسجيل الدخول إلى لوحة تحكم cPanel
+2. الانتقال إلى مدير الملفات (File Manager)
+3. الذهاب إلى مجلد `public_html` (أو المجلد الفرعي الذي تريده)
+4. رفع وفك ضغط ملف `web.zip`
+5. التأكد من أن ملف `index.html` في المسار الصحيح
+
+## ملفات مساعدة تم إنشاؤها
+
+- **api_service.dart**: خدمة نموذجية للاتصال بـ API
+- **constants.dart**: ثوابت ومتغيرات التطبيق (مثل عنوان API ومفتاح API)
+- **models.dart**: نماذج بيانات نموذجية
+
+## بيانات الاتصال بـ API
+
+```dart
+const String apiKey = '9fedcbced6b38503dcae6c8e1f766a2d';
+const String baseUrl = 'https://yemenmazady.com/api/';
+```
+
+## الأوامر المتاحة
+
+- `./setup_flutter.sh`: تثبيت Flutter SDK (يتم تنفيذه تلقائياً)
+- `./build_for_cpanel.sh`: بناء نسخة الويب وتجهيزها للرفع على cPanel
+- `bash run.sh`: تشغيل تطبيق Flutter على المنفذ 5000 (للاختبار)
+
+---
+
+# Flutter Web for cPanel - Development Environment
+
+This environment is set up for developing and building a Flutter Web application for deployment on cPanel hosting.
 
 ## Features
 
-- Flutter SDK installed and configured
-- Flutter web support enabled
-- Simple web server to serve your built web application
-- Support for your existing Flutter project files
+- ✅ Pre-installed and configured Flutter SDK
+- ✅ Flutter web support enabled
+- ✅ Sample API libraries (api_service.dart)
+- ✅ Ready project folder (/my_flutter_web_project)
+- ✅ Special tools for building cPanel-compatible files
 
 ## How to Use
 
-1. **Upload Your Flutter Project Files**
-   - Upload your Flutter project files to the `/home/runner/my_flutter_web_project` directory
-   - Ensure your project has all necessary files (pubspec.yaml, lib/main.dart, etc.)
+### 1. Upload Your Project Files
 
-2. **Build and Run Your Project**
-   - Run `bash run.sh` in the Replit Shell
-   - This will:
-     - Install Flutter if not already installed
-     - Run `flutter pub get` to get dependencies
-     - Build the web version with `flutter build web --release`
-     - Start a web server to serve your application on port 5000
-
-3. **View Your Application**
-   - Your application will be available in the Replit webview
-
-## Directory Structure
-
+Upload your Flutter project files to:
 ```
-/home/runner/                 # Replit project root
-├── flutter/                  # Flutter SDK installation
-├── my_flutter_web_project/   # Your Flutter project directory
-│   ├── lib/                  # Your Flutter app code
-│   ├── pubspec.yaml          # Project dependencies
-│   └── ...                   # Other project files
-├── setup_flutter.sh          # Script to install Flutter SDK
-└── run.sh                    # Script to build and run your app
+/home/runner/my_flutter_web_project
 ```
 
-## Notes
+Make sure you have at least these files:
+- `pubspec.yaml`
+- `lib/` directory with `main.dart`
+- Other Flutter project files
 
-- If you're connecting to a backend API, make sure to update the API URLs in your code
-- The web server runs on port 5000
-- Flutter web builds are saved to `/home/runner/my_flutter_web_project/build/web`
+### 2. Build Web Version for cPanel
 
-## Troubleshooting
+Run:
+```
+./build_for_cpanel.sh
+```
 
-If you encounter any issues:
-1. Check that your Flutter project files are correctly uploaded
-2. Run `bash setup_flutter.sh` to reinstall Flutter if needed
-3. Check the console logs for any error messages
+This script will:
+1. Install your project dependencies
+2. Build the web version with cPanel-specific optimizations
+3. Create a ready-to-upload `web.zip` file
+
+### 3. Download the ZIP and Upload to cPanel
+
+After the build is complete, you'll find:
+```
+/home/runner/web.zip
+```
+
+Download this file and:
+1. Log in to your cPanel control panel
+2. Navigate to File Manager
+3. Go to the `public_html` directory (or your desired subdirectory)
+4. Upload and extract `web.zip`
+5. Make sure `index.html` is in the correct location
+
+## Helper Files Created
+
+- **api_service.dart**: Sample service for API connections
+- **constants.dart**: App constants (like API URL and API Key)
+- **models.dart**: Sample data models
+
+## API Connection Details
+
+```dart
+const String apiKey = '9fedcbced6b38503dcae6c8e1f766a2d';
+const String baseUrl = 'https://yemenmazady.com/api/';
+```
+
+## Available Commands
+
+- `./setup_flutter.sh`: Install Flutter SDK (runs automatically)
+- `./build_for_cpanel.sh`: Build web version and prepare for cPanel upload
+- `bash run.sh`: Run the Flutter app on port 5000 (for testing)
