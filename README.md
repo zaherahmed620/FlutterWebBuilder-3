@@ -1,143 +1,80 @@
-# Flutter Web for cPanel - بيئة تطوير Flutter للويب
+# تطبيق يمن مزادي للويب
 
-هذه البيئة مجهزة لتطوير وبناء تطبيق Flutter Web ورفعه على استضافة cPanel.
+تطبيق ويب مبني باستخدام Flutter لمنصة يمن مزادي. هذا التطبيق يتيح للمستخدمين تصفح وشراء المنتجات والخدمات المتاحة على المنصة.
 
 ## الميزات
 
-- ✅ Flutter SDK مُثبت ومُعَد مسبقاً
-- ✅ دعم Flutter للويب مُفعّل
-- ✅ مكتبات نموذجية لـ API (api_service.dart)
-- ✅ مجلد جاهز لمشروعك (/my_flutter_web_project)
-- ✅ أدوات خاصة لبناء الملفات بتنسيق متوافق مع cPanel
+- واجهة مستخدم سهلة الاستخدام بدعم كامل للغة العربية
+- التكامل مع API الخاص بيمن مزادي
+- دعم تسجيل الدخول وإنشاء حساب جديد
+- تصفح الفئات والخدمات المتاحة
+- متوافق مع جميع أحجام الشاشات (تصميم متجاوب)
 
-## كيفية الاستخدام
+## التثبيت
 
-### 1. تحميل ملفات مشروعك
+### متطلبات النظام
 
-قم بتحميل ملفات مشروع Flutter الخاص بك إلى المجلد:
+- Flutter SDK v2.5.0 أو أحدث
+- Dart SDK v2.14.0 أو أحدث
+- متصفح ويب حديث
+
+### للتطوير المحلي
+
+1. استنساخ هذا المستودع:
 ```
-/home/runner/my_flutter_web_project
-```
-
-تأكد من أن لديك على الأقل الملفات التالية:
-- `pubspec.yaml`
-- مجلد `lib/` يحتوي على `main.dart`
-- ملفات مشروع Flutter الأخرى
-
-### 2. بناء نسخة الويب للرفع على cPanel
-
-شغل الأمر التالي:
-```
-./build_for_cpanel.sh
+git clone https://github.com/yourusername/yemen-mazady-web.git
 ```
 
-سيقوم هذا السكربت بما يلي:
-1. تثبيت اعتماديات مشروعك
-2. بناء نسخة الويب مع تحسينات خاصة بـ cPanel
-3. إنشاء ملف `web.zip` جاهز للرفع
-
-### 3. تنزيل ملف ZIP ورفعه على cPanel
-
-بعد اكتمال عملية البناء، ستجد ملف:
+2. التنقل إلى مجلد المشروع:
 ```
-/home/runner/web.zip
+cd yemen-mazady-web
 ```
 
-قم بتنزيل هذا الملف ثم:
-1. تسجيل الدخول إلى لوحة تحكم cPanel
-2. الانتقال إلى مدير الملفات (File Manager)
-3. الذهاب إلى مجلد `public_html` (أو المجلد الفرعي الذي تريده)
-4. رفع وفك ضغط ملف `web.zip`
-5. التأكد من أن ملف `index.html` في المسار الصحيح
-
-## ملفات مساعدة تم إنشاؤها
-
-- **api_service.dart**: خدمة نموذجية للاتصال بـ API
-- **constants.dart**: ثوابت ومتغيرات التطبيق (مثل عنوان API ومفتاح API)
-- **models.dart**: نماذج بيانات نموذجية
-
-## بيانات الاتصال بـ API
-
-```dart
-const String apiKey = '9fedcbced6b38503dcae6c8e1f766a2d';
-const String baseUrl = 'https://yemenmazady.com/api/';
+3. الحصول على التبعيات:
+```
+flutter pub get
 ```
 
-## الأوامر المتاحة
-
-- `./setup_flutter.sh`: تثبيت Flutter SDK (يتم تنفيذه تلقائياً)
-- `./build_for_cpanel.sh`: بناء نسخة الويب وتجهيزها للرفع على cPanel
-- `bash run.sh`: تشغيل تطبيق Flutter على المنفذ 5000 (للاختبار)
-
----
-
-# Flutter Web for cPanel - Development Environment
-
-This environment is set up for developing and building a Flutter Web application for deployment on cPanel hosting.
-
-## Features
-
-- ✅ Pre-installed and configured Flutter SDK
-- ✅ Flutter web support enabled
-- ✅ Sample API libraries (api_service.dart)
-- ✅ Ready project folder (/my_flutter_web_project)
-- ✅ Special tools for building cPanel-compatible files
-
-## How to Use
-
-### 1. Upload Your Project Files
-
-Upload your Flutter project files to:
+4. تشغيل التطبيق في وضع التطوير:
 ```
-/home/runner/my_flutter_web_project
+flutter run -d chrome
 ```
 
-Make sure you have at least these files:
-- `pubspec.yaml`
-- `lib/` directory with `main.dart`
-- Other Flutter project files
+### للنشر على cPanel
 
-### 2. Build Web Version for cPanel
+راجع ملف [CPANEL_GUIDE.md](CPANEL_GUIDE.md) للحصول على إرشادات مفصلة حول كيفية نشر التطبيق على استضافة cPanel.
 
-Run:
+## هيكل المشروع
+
 ```
-./build_for_cpanel.sh
-```
-
-This script will:
-1. Install your project dependencies
-2. Build the web version with cPanel-specific optimizations
-3. Create a ready-to-upload `web.zip` file
-
-### 3. Download the ZIP and Upload to cPanel
-
-After the build is complete, you'll find:
-```
-/home/runner/web.zip
+lib/
+  ├── models/        # نماذج البيانات
+  ├── screens/       # شاشات واجهة المستخدم
+  ├── services/      # خدمات API واتصالات الشبكة
+  ├── utils/         # أدوات مساعدة وثوابت
+  └── main.dart      # نقطة الدخول للتطبيق
 ```
 
-Download this file and:
-1. Log in to your cPanel control panel
-2. Navigate to File Manager
-3. Go to the `public_html` directory (or your desired subdirectory)
-4. Upload and extract `web.zip`
-5. Make sure `index.html` is in the correct location
+## تكوين API
 
-## Helper Files Created
+يتصل التطبيق بـ API يمن مزادي على الرابط: `https://yemenmazady.com/api/`
 
-- **api_service.dart**: Sample service for API connections
-- **constants.dart**: App constants (like API URL and API Key)
-- **models.dart**: Sample data models
+يمكن تعديل إعدادات الاتصال في ملف: `lib/utils/constants.dart`
 
-## API Connection Details
+## المساهمة
 
-```dart
-const String apiKey = '9fedcbced6b38503dcae6c8e1f766a2d';
-const String baseUrl = 'https://yemenmazady.com/api/';
-```
+للمساهمة في تطوير هذا المشروع، يرجى اتباع الخطوات التالية:
 
-## Available Commands
+1. انشئ "fork" من المستودع
+2. قم بإنشاء فرع جديد للميزة: `git checkout -b feature/amazing-feature`
+3. قم بتنفيذ التغييرات وحفظها: `git commit -m 'إضافة ميزة رائعة'`
+4. ارفع الفرع إلى المستودع الخاص بك: `git push origin feature/amazing-feature`
+5. افتح طلب سحب "Pull Request"
 
-- `./setup_flutter.sh`: Install Flutter SDK (runs automatically)
-- `./build_for_cpanel.sh`: Build web version and prepare for cPanel upload
-- `bash run.sh`: Run the Flutter app on port 5000 (for testing)
+## الترخيص
+
+هذا المشروع مرخص بموجب ترخيص MIT - راجع ملف LICENSE للتفاصيل.
+
+## التواصل
+
+للأسئلة أو الاستفسارات، يرجى التواصل مع فريق يمن مزادي.
