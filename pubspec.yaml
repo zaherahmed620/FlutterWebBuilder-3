@@ -1,28 +1,25 @@
-name: yemen_mazady_app
-description: Yemen Mazady Flutter Web Application
+    name: yemencash
+    description: YemenCash Flutter App (Converted from Web to Flutter)
+    publish_to: 'none'
 
-publish_to: 'none'
-version: 1.0.0+1
+    version: 1.0.0+1
 
-environment:
-  sdk: '>=3.0.0 <4.0.0'
+    environment:
+      sdk: ">=3.0.0 <4.0.0"
 
-dependencies:
-  flutter:
-    sdk: flutter
-  cupertino_icons: ^1.0.5
-  http: ^1.1.0
-  flutter_localizations:
-    sdk: flutter
-  intl: ^0.18.1
+    dependencies:
+      flutter:
+        sdk: flutter
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^2.0.2
+      cupertino_icons: ^1.0.2
 
-flutter:
-  uses-material-design: true
-  
-  assets:
-    - assets/images/
+    dev_dependencies:
+      flutter_test:
+        sdk: flutter
+
+    flutter:
+      uses-material-design: true
+
+      assets:
+        - assets/icons/
+        - assets/ads/
